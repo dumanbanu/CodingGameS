@@ -1,1 +1,1 @@
-# CodingGameS
+# CodingGame Crystal Rush
