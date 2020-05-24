@@ -1,0 +1,67 @@
+import math._
+import scala.util._
+import scala.io.StdIn._
+//I have defined the ArrayBuffer library to throw integers into my array.
+import scala.collection.mutable.ArrayBuffer
+
+/**
+ * Deliver more ore to hq (left side of the map) than your opponent. Use radars to find ore but beware of traps!
+ **/
+
+object Player extends App {
+    // height: size of the map
+    val Array(width, height) = (readLine split " ").map (_.toInt)
+    // game loop
+    while(true) {
+        // myScore: Amount of ore delivered
+        val Array(myScore, opponentScore) = (readLine split " ").map (_.toInt)
+        for(i <- 0 until height) {
+            var inputs = readLine split " "
+            for(j <- 0 until width) {
+                // ore: amount of ore or "?" if unknown
+                // hole: 1 if cell has a hole
+                val hole = inputs(2*j+1)
+                
+            }
+        }
+        // entityCount: number of entities visible to you
+        // radarCooldown: turns left until a new radar can be requested
+        // trapCooldown: turns left until a new trap can be requested
+        
+        val Array(entityCount, radarCooldown, trapCooldown) = (readLine split " ").map (_.toInt)
+        val arrayItem = ArrayBuffer[Int]();//içine her bir rounddaki itemlerin integer karşılığını tutan "item" değişkenini pushlamak için integer türünde bir array oluşturdum.
+        val arrayOfX = ArrayBuffer[Int]();//içine her bir rounddaki robotların x koordinatlarının integer karşılığını tutan "x" değişkenini pushlamak için integer türünde bir array oluşturdum.
+        val arrayOfY = ArrayBuffer[Int]();//içine her bir rounddaki robotların y koordinatlarının integer karşılığını tutan "y" değişkenini pushlamak için integer türünde bir array oluşturdum.
+        for(i <- 0 until entityCount) {
+            // entityId: unique id of the entity
+            // entityType: 0 for your robot, 1 for other robot, 2 for radar, 3 for trap
+            // y: position of the entity
+            // item: if this entity is a robot, the item it is carrying (-1 for NONE, 2 for RADAR, 3 for TRAP, 4 for ORE)
+            val Array(entityId, entityType, x, y, item) = (readLine split " ").map (_.toInt);       
+            arrayItem += item;//oluşturduğumuz array'e item pushluyoruz.
+            arrayOfX += x;//oluşturduğumuz array'e x koordinatlarını pushluyoruz.
+            arrayOfY += y;//oluşturduğumuz array'e y koordinatlarını pushluyoruz.
+        }
+
+        for(i <- 0 until 5) {
+            //robotlarımızın 0-29 X koordinatları ve 0-14 ye koordinatları arasında gezebilmesi için random sınıfından sayı üretiyoruz.
+            val rnd = new scala.util.Random
+            val randNumberX = rnd.nextInt(29)
+            val randNumberY = rnd.nextInt(14)
+            //her turda kontrol ediyoruz. Eğer bu turda robotumuzun üzerindeki pushladığımız item değeri 4'se yani yerden cevher aldıysa. 0-0 koordinatlarına gönderip teslim etmesini sağlıyoruz.
+            if(arrayItem(i)==4){
+                arrayOfX(i) = 0;
+                arrayOfY(i) = 0;
+                println("MOVE "+arrayOfX(i)+" "+arrayOfY(i));
+            }
+            //her turda kontrol ediyoruz. Eğer bu turda robotumuzun üzerindeki pushladığımız item değeri 4 değilse yani yerden cevher almadıysa ve ya üzerinde herhangi bir item yoksa. Ürettiğimiz random sayı koordinatlarında gezip buraları kazmalarını sağlıyoruz.
+            else{                
+                println("DIG "+randNumberX+" "+randNumberY);                
+            }
+            
+        }
+
+    }
+
+
+}
