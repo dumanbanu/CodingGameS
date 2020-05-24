@@ -12,7 +12,6 @@
 
 -Even in such a simple algorithm, I was promoted to the Bronze league. If I used trap and radar, I can't even imagine what would happen.
 
--The only reason I chose this game is that it has no online source. Regards.. :)
 
 
 
